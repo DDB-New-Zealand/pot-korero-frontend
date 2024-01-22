@@ -14,17 +14,12 @@ jobs:
     if: github.event_name == 'push' || (github.event_name == 'pull_request' && github.event.action != 'closed')
     runs-on: ubuntu-latest
     name: Build and Deploy Job
-    environment:
-      name: Production
-    steps:  
+    steps:
       - uses: actions/checkout@v3
         with:
           submodules: true
           lfs: false
       - name: Build And Deploy
-        env:
-          TEST: ${{ secrets.TEST }}
-          NEXT_PUBLIC_TEST: ${{ secrets.NEXT_PUBLIC_TEST }}
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
         with:
